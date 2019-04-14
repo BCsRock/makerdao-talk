@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Hannes Gräuler (@lordi)">
+  <title>Dai - Solving the Stablecoin Drama the Decentralized Way</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://revealjs.com/css/reveal.css">
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="https://revealjs.com/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://revealjs.com/css/print/pdf.css' : 'https://revealjs.com/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://revealjs.com/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Dai - Solving the Stablecoin Drama the Decentralized Way</h1>
+  <p class="author">Hannes Gräuler (<span class="citation" data-cites="lordi">@lordi</span>)</p>
+  <p class="date">Crypto Monday, March 2019</p>
+</section>
+
+<section class="slide level1">
+
+<section id="section" class="level2">
+<h2></h2>
+<style>
+.container {
+    display: flex;
+}
+.col {
+    flex: 1;
+}
+.reveal h1,
+.reveal h2 {
+    text-transform: inherit;
+    color: orange;
+}
+</style>
+<ol type="1">
+<li class="fragment">MakerDAO - A Short History</li>
+<li class="fragment">Stable coins</li>
+<li class="fragment">Dai</li>
+<li class="fragment">Governance</li>
+<li class="fragment">The big picture - Discussion and Outlook</li>
+</ol>
+</section>
+</section>
+<section class="slide level1">
+
+<section id="makerdao" class="level2">
+<h2>MakerDAO</h2>
+</section>
+<section id="section-1" class="level2">
+<h2></h2>
+<p><del>affiliated</del></p>
+<ul>
+<li class="fragment"><a href="https://geoplex.de">geoplex.de</a> - 2D/3D GIS</li>
+<li class="fragment"><a href="https://syncrypt.space">syncrypt.space</a> - Encrypted cloud storage</li>
+</ul>
+</section>
+<section id="short-history" class="level2">
+<h2>Short history</h2>
+<ul>
+<li class="fragment">Bitcoin (2008)</li>
+<li class="fragment">Ethereum mainnet launch (2015)</li>
+<li class="fragment">The DAO (2016)</li>
+<li class="fragment">Already in 2014: MakerDAO was founded by Rune Christensen</li>
+</ul>
+</section>
+<section id="back-then" class="level2">
+<h2>Back then</h2>
+<ul>
+<li class="fragment">A company “founded in a chat room” / No jurisdiction</li>
+<li class="fragment">No ICO
+<ul>
+<li class="fragment">Private sales to friends, family and investors</li>
+<li class="fragment">Goal: Responsible token holders as owners</li>
+</ul></li>
+<li class="fragment">First MakerDAO owner token issued on Bitshares</li>
+</ul>
+</section>
+<section id="nowadays" class="level2">
+<h2>Nowadays</h2>
+<ul>
+<li class="fragment">Moved to Ethereum: MKR is an ERC20 token</li>
+<li class="fragment">Distributed: 100 Employees in ~30 Cities</li>
+<li class="fragment"><a href="https://www.crunchbase.com/organization/makerdao#section-funding-rounds">Investment since 2017 ~$27M, Andreessen Horowitz, Polychain Capital and others</a></li>
+<li class="fragment">No registered companies?</li>
+</ul>
+</section>
+</section>
+<section class="slide level1">
+
+<section id="stable-coins" class="level2">
+<h2>Stable coins</h2>
+</section>
+<section id="section-2" class="level2">
+<h2></h2>
+<p>“You need stablecoins to realize the full potential of blockchain technology.”</p>
+</section>
+<section id="why" class="level2">
+<h2>Why?</h2>
+<ul>
+<li class="fragment">Augur bet in 6 months</li>
+<li class="fragment">ICO participation (both sides)</li>
+<li class="fragment">Remittances</li>
+<li class="fragment">etc.</li>
+</ul>
+<p class="fragment">
+→ Majority of use cases <em>require</em> a stable coin.
+</p>
+</section>
+<section id="basic-requirements" class="level2">
+<h2>Basic requirements</h2>
+<ul>
+<li class="fragment">Pegged to a reference value ($, €, IMF SDR, …)</li>
+<li class="fragment">Backed by something to assert value</li>
+</ul>
+</section>
+<section id="risks" class="level2">
+<h2>Risks</h2>
+<ul>
+<li class="fragment">Risk #1: Irrational market <span style="color: orange;">🙃</span></li>
+<li class="fragment">Risk #2: Counter Party / Collateral <span style="color: orange;">😕</span></li>
+</ul>
+</section>
+<section id="one-solution" class="level2">
+<h2>One Solution</h2>
+<p><em>Fiat-backed stablecoins</em> are IOU tokens and are usually backed by a bank balance.</p>
+</section>
+<section id="examples" class="level2">
+<h2>Examples</h2>
+<div class="container">
+<div>
+<ul>
+<li class="fragment">Tether (USDT, 2.000 Mio US$)</li>
+<li class="fragment">USD-C (Circle/Coinbase, 239 Mio US$)</li>
+<li class="fragment">TrueUSD (TrustToken, 198 Mio US$)</li>
+<li class="fragment">Gemini Dollar (65 Mio US$)</li>
+<li class="fragment">PAXOS, JPM Coin (JP Morgan), …</li>
+</ul>
+</div>
+<div class="col">
+<p><img data-src="./fiat_backed_stable_coins.png" /></p>
+</div>
+</div>
+</section>
+<section id="the-risks" class="level2">
+<h2>The Risks</h2>
+<ul>
+<li class="fragment">Risk #1: Irrational market <span style="color: orange;">🙃</span>
+<ul>
+<li class="fragment">COIN &lt; USD:
+<ul>
+<li class="fragment">Arbitrage opportunity because of IOU redemption (Redeemability)</li>
+</ul></li>
+<li class="fragment">COIN &gt; USD:
+<ul>
+<li class="fragment">Arbitrage opportunity as long as you can buy/mint</li>
+</ul></li>
+</ul></li>
+<li class="fragment">Risk #2: Counter Party / Collateral <span style="color: orange;">😕</span>
+<ul>
+<li class="fragment">Blind trust, or</li>
+<li class="fragment">Periodic audits to prove solvency of the IOU company</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-3" class="level2">
+<h2></h2>
+<p><small>March 14, 2019</small></p>
+<p><img data-src="tether.png" class="plain" style="width:60.0%" /></p>
+</section>
+<section id="audits" class="level2">
+<h2>Audits</h2>
+<ul>
+<li class="fragment">Third party audits a remedy?</li>
+<li class="fragment">Tether: 2017 no audits, 2018 claims to have been audited by sketchy firms</li>
+<li class="fragment">TrueUSD: Monthly audit by Cohen &amp; Company, a top 50 U.S. public accounting firm</li>
+<li class="fragment">Trust is deligated. Meh.</li>
+</ul>
+</section>
+<section id="section-4" class="level2">
+<h2></h2>
+<p>
+Is there a better way?
+</p>
+</section>
+</section>
+<section class="slide level1">
+
+<section id="dai" class="level2">
+<h2>Dai</h2>
+</section>
+<section id="section-5" class="level2">
+<h2></h2>
+<svg width="305" height="123" viewBox="0 0 305 123" fill="none" style="margin-bottom: 2.2rem;">
+<g filter="url(#filter0_d)"><rect x="7" y="5" width="109" height="109" rx="45" fill="white"></rect></g><g filter="url(#filter1_d)"><rect x="188.667" y="5" width="109" height="109" rx="45" fill="white"></rect></g><path d="M38.4601 76.2686H46.3641V39.6086H40.9041L30.4521 42.7286L32.1161 49.2806L38.4601 47.7206V76.2686Z" fill="#FDB134"></path><path d="M253.432 76.2686H261.336V39.6086H255.876L245.424 42.7286L247.088 49.2806L253.432 47.7206V76.2686Z" fill="#30BD9F"></path><path d="M226.592 76.3328H230.159V72.2738C235.366 71.8228 238.892 68.8298 238.892 64.3608V64.2788C238.892 59.8918 236.227 57.3908 229.995 55.8328V48.0428C231.922 48.4528 233.767 49.3138 235.571 50.6668L237.867 46.8128C235.612 45.1318 233.152 44.0658 230.159 43.6968V41.2368H226.592V43.6148C221.467 44.0248 217.982 47.0178 217.982 51.4458V51.5278C217.982 56.1198 220.77 58.3748 226.756 59.9328V67.9688C224.091 67.5588 221.877 66.3288 219.54 64.4428L216.916 68.1738C219.704 70.3878 223.025 71.8228 226.592 72.2328V76.3328ZM226.756 54.9718C223.599 54.0288 222.82 52.9218 222.82 51.2408V51.1588C222.82 49.3548 224.173 47.9608 226.756 47.7558V54.9718ZM229.995 68.1328V60.7118C233.193 61.6548 234.054 62.7618 234.054 64.5658V64.6478C234.054 66.6158 232.578 67.9278 229.995 68.1328Z" fill="#30BD9F"></path><path d="M163.146 55.9366H140.342V51.5343H163.146V55.9366ZM163.146 67.2843H140.342V62.9093H163.146V67.2843Z" fill="#ABBAC8"></path><g filter="url(#filter2_i)"><path d="M75.1255 39.3174L93.797 57.9873L75.1255 76.6575L56.4541 57.9873L75.1255 39.3174Z" fill="url(#paint0_radial)"></path></g><path opacity="0.16" d="M74.9795 76.6543V39.3148L93.464 57.9845L74.9795 76.6543V76.6543Z" fill="white"></path><path d="M63.3575 56.2674C63.1859 56.461 63.3233 56.7665 63.582 56.7665H71.2263C71.3118 56.7665 71.3933 56.7299 71.4502 56.666L74.7679 52.9428C74.883 52.8136 75.0833 52.8084 75.205 52.9313L78.9141 56.6775C78.9704 56.7344 79.0472 56.7665 79.1273 56.7665H86.7661C87.0271 56.7665 87.1636 56.4562 86.9873 56.2638L75.2052 43.4043C75.085 43.2731 74.8776 43.2748 74.7595 43.408L63.3575 56.2674Z" fill="white"></path><defs><filter id="filter0_d" x="0" y="0" width="123" height="123" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3.5"></feGaussianBlur><feColorMatrix type="matrix" values="0 0 0 0 0.918812 0 0 0 0 0.937606 0 0 0 0 0.9564 0 0 0 1 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend></filter><filter id="filter1_d" x="181.667" y="0" width="123" height="123" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"></feColorMatrix><feOffset dy="2"></feOffset><feGaussianBlur stdDeviation="3.5"></feGaussianBlur><feColorMatrix type="matrix" values="0 0 0 0 0.918812 0 0 0 0 0.937606 0 0 0 0 0.9564 0 0 0 1 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend></filter><filter id="filter2_i" x="56.4541" y="39.3174" width="37.3429" height="38.3401" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="1"></feOffset><feGaussianBlur stdDeviation="1.5"></feGaussianBlur><feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"></feComposite><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.810252 0 0 0 0 0.362445 0 0 0 1 0"></feColorMatrix><feBlend mode="normal" in2="shape" result="effect1_innerShadow"></feBlend></filter><radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(75.1255 57.9874) rotate(90) scale(18.67 18.6714)"><stop stop-color="#FFDB87"></stop><stop offset="1" stop-color="#FFBD21"></stop></radialGradient></defs>
+</svg>
+<ul>
+<li class="fragment">ERC20 Token</li>
+<li class="fragment">pegged to USD</li>
+<li class="fragment">launched Dec 2017</li>
+</ul>
+</section>
+<section id="idea" class="level2">
+<h2>Idea</h2>
+<p>Provide stability by</p>
+<ul>
+<li class="fragment">Collateralized Debt Positions (CDPs),</li>
+<li class="fragment">autonomous feedback mechanisms, and</li>
+<li class="fragment">appropriately incentivized external actors.</li>
+</ul>
+</section>
+<section id="section-6" class="level2">
+<h2></h2>
+<p>Sounds fancy, how does it work?</p>
+</section>
+<section id="cdp" class="level2">
+<h2>CDP</h2>
+<ul>
+<li class="fragment">Smart contract (think verifiable vending machine)</li>
+<li class="fragment">Automated way to create and repay loans</li>
+<li class="fragment">A smart contract can only operate on data that is on the blockchain</li>
+</ul>
+</section>
+<section id="most-important-slide" class="level2">
+<h2>Most important slide</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Paid in</th>
+<th>Collateral</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bank loan</td>
+<td>Euro</td>
+<td>Your house</td>
+</tr>
+<tr class="even">
+<td>CDP</td>
+<td>Dai</td>
+<td>Ether</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="section-7" class="level2">
+<h2></h2>
+<p>Can we deal with the risks in a decentralized manner?</p>
+</section>
+<section id="dealing-with-the-risks" class="level2">
+<h2>Dealing with the risks</h2>
+<ul>
+<li class="fragment">Risk #1: Irrational market <span style="color: orange;">🙃</span>
+<ul>
+<li class="fragment">NOT redeemable!</li>
+<li class="fragment">Arbitrage (Keeper bots)</li>
+<li class="fragment">Dai &lt; USD:
+<ul>
+<li class="fragment">System incentives repayment of CDPs</li>
+</ul></li>
+<li class="fragment">Dai &gt; USD:
+<ul>
+<li class="fragment">System incentives creation of CDPs</li>
+</ul></li>
+</ul></li>
+</ul>
+<p class="fragment">
+→ Basically supply is controlled by incentives
+</p>
+</section>
+<section id="dealing-with-the-risks-1" class="level2">
+<h2>Dealing with the risks</h2>
+<ul>
+<li class="fragment"><p>Risk #2: Counter Party / Collateral <span style="color: orange;">😕</span></p>
+<ul>
+<li class="fragment">On-chain “staking” of collateral</li>
+<li class="fragment">Always over-collateralized (“Secure debt”), because of volatile nature of the asset</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-much-dai-can-i-draw" class="level2">
+<h2>How much Dai can I draw?</h2>
+<p><img data-src="./cdp.svg" class="plain" style="width:20.0%" /></p>
+<ul>
+<li class="fragment">The amount of Dai depends on the price of ETH</li>
+<li class="fragment">The ratio is called “collateralization ratio”</li>
+<li class="fragment">Must be higher than the “liquidation ratio” (150%)</li>
+</ul>
+</section>
+<section id="if-ether-goes-up" class="level2">
+<h2>If Ether goes up</h2>
+<p><img data-src="./cdp_collateral_up.svg" class="plain" style="width:40.0%" /></p>
+<ul>
+<li class="fragment">Not a problem, collateralization ratio goes up</li>
+<li class="fragment">Dai gets stronger as there is more collateral</li>
+<li class="fragment">Payback amount in Dai does not change</li>
+</ul>
+</section>
+<section id="section-8" class="level2">
+<h2></h2>
+<p><img data-src="./cdp_margin_long.svg" class="plain" style="width:40.0%" /></p>
+<p>Use Dai to buy more of the collateral asset.</p>
+<p class="fragment">
+→ Decentralized margin long
+</p>
+</section>
+<section id="if-ether-goes-down" class="level2">
+<h2>If Ether goes down</h2>
+<p><img data-src="./cdp_collateral_down.svg" class="plain" style="width:20.0%" /></p>
+<ul>
+<li class="fragment">May become a problem: A CDP can become “under-collateralized”.</li>
+<li class="fragment">Forced liquidation when hitting liquidation ratio (Margin call)</li>
+</ul>
+</section>
+<section id="liquidation" class="level2">
+<h2>Liquidation</h2>
+<p><img data-src="./cdp_liquidation.svg" class="plain" style="width:20.0%" /></p>
+<ul>
+<li class="fragment">Auctions part the your collateral to the highest bidder</li>
+<li class="fragment">Adds a penalty (13% of borrowed assets) to incentivize high collateralization ratios</li>
+</ul>
+</section>
+<section id="returning-your-dai" class="level2">
+<h2>Returning your Dai</h2>
+<p><img data-src="./cdp_close.svg" class="plain" style="width:20.0%" /></p>
+<ul>
+<li class="fragment">If you want to access your collateral, you have to close repay the borrowed Dai.</li>
+<li class="fragment">Pay stability fees in relation to the holding period</li>
+</ul>
+</section>
+<section id="section-9" class="level2">
+<h2></h2>
+<p>All is good!</p>
+</section>
+<section id="is-it" class="level2">
+<h2>Is it?</h2>
+<p><img data-src="./black_swan.jpg" class="plain" /></p>
+</section>
+</section>
+<section class="slide level1">
+
+<section id="governance" class="level2">
+<h2>Governance</h2>
+</section>
+<section id="section-10" class="level2">
+<h2></h2>
+<ul>
+<li class="fragment">Who sets the collateralization ratio?</li>
+<li class="fragment">Who sets the stability fee?</li>
+<li class="fragment">Who white-lists the oracle price feeds?</li>
+<li class="fragment">Who decides which tokens can be used as collateral?</li>
+</ul>
+<p class="fragment">
+→ MKR holders
+</p>
+</section>
+<section id="mkr-token" class="level2">
+<h2>MKR Token</h2>
+<ul>
+<li class="fragment">Governance (https://vote.makerdao.com/)</li>
+<li class="fragment">Insurance against black swan events</li>
+<li class="fragment">Receive a compensation</li>
+<li class="fragment">Basic idea: “Share risk and profit”</li>
+</ul>
+</section>
+<section id="global-settlement" class="level2">
+<h2>Global settlement</h2>
+<ul>
+<li class="fragment">Last resort shutdown</li>
+<li class="fragment">Everyone can claim the net value of the collateral they are entitled to</li>
+<li class="fragment">Can be triggered by whitelisted MKR holders</li>
+</ul>
+</section>
+<section id="stability-fees" class="level2">
+<h2>Stability Fees</h2>
+<ul>
+<li class="fragment">Stability fees are collected in MKR and send to a burner contract</li>
+<li class="fragment">By shrinking supply, MKR holders are rewarded for taking on the involved risks</li>
+</ul>
+</section>
+<section id="community" class="level2">
+<h2>Community</h2>
+<ul>
+<li class="fragment">Friendly community</li>
+<li class="fragment">Weekly Community Calls / Governance Calls</li>
+</ul>
+<blockquote>
+<p>“We are dedicated to providing material for new people to understand the system in depth. This will be important for successful governance in the project’s future.”</p>
+</blockquote>
+</section>
+<section id="section-11" class="level2">
+<h2></h2>
+<p><img data-src="./eth_dai_mkr.png" style="width:77.0%" /></p>
+<p><small>Symbiotic relationship: Dapps need Dai, MakerDAO need Dapps <a href="https://medium.com/@cyrus.younessi/an-elegant-relationship-dai-eth-mkr-4e4d5e69590">Medium post</a></small></p>
+</section>
+<section id="section-12" class="level2">
+<h2></h2>
+<p>Ok, but does it work?</p>
+</section>
+<section id="section-13" class="level2">
+<h2></h2>
+<p><img data-src="./dai_price.png" class="plain" /></p>
+</section>
+<section id="scale" class="level2">
+<h2>Scale</h2>
+<ul>
+<li class="fragment">USD 4 Million in BTC Lightning Network</li>
+<li class="fragment">USD 300 Million in CDPs (~2 % of all ETH)</li>
+</ul>
+</section>
+<section id="section-14" class="level2">
+<h2></h2>
+<p><img data-src="./when_u_makerdao.jpg" /></p>
+</section>
+<section id="dai-supply-and-stability-fee" class="level2">
+<h2>Dai Supply and stability fee</h2>
+<p><img data-src="./stability_fee_and_dai_supply.png" class="plain" /></p>
+</section>
+<section id="where-we-at" class="level2">
+<h2>Where we at?</h2>
+<ul>
+<li class="fragment">Tether (USDT, 2.000 Mio US$)</li>
+<li class="fragment">USD-C (Circle/Coinbase, 239 Mio US$)</li>
+<li class="fragment">TrueUSD (TrustToken, 198 Mio US$)</li>
+<li class="fragment"><strong>Dai (95 Mio US$)</strong></li>
+<li class="fragment">Gemini Dollar (65 Mio US$)</li>
+</ul>
+</section>
+</section>
+<section class="slide level1">
+
+<section id="discussion" class="level2">
+<h2>Discussion</h2>
+</section>
+<section id="section-15" class="level2">
+<h2></h2>
+<ol type="1">
+<li class="fragment">Use cases and related projects</li>
+<li class="fragment">Risks and criticism</li>
+<li class="fragment">Future developments</li>
+<li class="fragment">Wrap up / The big picture</li>
+</ol>
+</section>
+<section id="use-cases-and-related-projects" class="level2">
+<h2>Use cases and related projects</h2>
+<ul>
+<li class="fragment">Ether on margin</li>
+<li class="fragment">Decentralized bank <a href="https://instadapp.io/">InstaDApp</a></li>
+<li class="fragment">Real estate investing <a href="https://www.forbes.com/sites/rachelwolfson/2019/02/20/stablecoins-could-unleash-wall-street-adoption-of-blockchain-technology/#617f3ea2453c">FACTOR-805</a></li>
+<li class="fragment"><a href="https://compound.finance/">Compound Finance</a> - Pool assets and receive interest, supports Dai</li>
+</ul>
+</section>
+<section id="xdai-chain" class="level2">
+<h2>xDai Chain</h2>
+<ul>
+<li class="fragment">Ethereum side chain built by POA Network</li>
+<li class="fragment">Proof of Authority, <a href="https://blockscout.com/poa/dai">5 second block time</a></li>
+<li class="fragment">XDai native token (representation of Dai)</li>
+<li class="fragment">Locking ERC20 tokens on Mainnet will mint those on side chain</li>
+<li class="fragment"><a href="https://xdai.io/">xdai.io Burner Wallet</a></li>
+<li class="fragment">Powered food trucks on ETHDenver 2019 (~35k USD turnover)</li>
+</ul>
+</section>
+<section id="criticism-12" class="level2">
+<h2>Criticism 1/2</h2>
+<ul>
+<li class="fragment">Deflation risk of the collateral (“CDPs swallowing ETH”)</li>
+<li class="fragment">Failure of governance</li>
+<li class="fragment">Regulatory uncertainty
+<ul>
+<li class="fragment">Who fights the legal wars? InstaDApp or MakerDAO?</li>
+<li class="fragment">Taxes?</li>
+</ul></li>
+</ul>
+</section>
+<section id="criticism-22" class="level2">
+<h2>Criticism 2/2</h2>
+<ul>
+<li class="fragment"><a href="https://medium.com/reserve-currency/our-analysis-of-the-makerdao-protocol-4a9872c1a824">Inability to scale to a global stable currency?</a>
+<ul>
+<li class="fragment">Might not be able to meet demand, while keeping over-collateralization</li>
+</ul></li>
+<li class="fragment">Price Wars with non-decentralized projects
+<ul>
+<li class="fragment">Tether could clone the system and offer 0 % loans</li>
+<li class="fragment">Leverage up to 1.67 % / BitMEX up to 100%</li>
+</ul></li>
+</ul>
+</section>
+<section id="alternatives" class="level2">
+<h2>Alternatives</h2>
+<ul>
+<li class="fragment">Algorithmic Supply Stablecoins</li>
+<li class="fragment">Metal-backed Stablecoins (DigixDAO)</li>
+<li class="fragment"><a href="https://stablecoinindex.com/projects">Other</a></li>
+</ul>
+</section>
+<section id="future-developments" class="level2">
+<h2>Future developments</h2>
+</section>
+<section id="multi-collateral-dai" class="level2">
+<h2>Multi-Collateral Dai</h2>
+<div class="container">
+
+<div class="col">
+<p><img data-src="./cdp_multi_collateral.svg" class="plain" style="width:70.0%" /></p>
+</div>
+<div class="col">
+<p>More stability and scalability through diversification</p>
+<ul>
+<li class="fragment">ERC20</li>
+<li class="fragment">BTC</li>
+<li class="fragment">Tokenized Bonds/Stocks/Art</li>
+<li class="fragment">…</li>
+</ul>
+</div>
+</section>
+<section id="section-16" class="level2">
+<h2></h2>
+<p>→ Any collateral could be valid. As long as sensible parameters are chosen.</p>
+</section>
+<section id="next-level" class="level2">
+<h2>Next level</h2>
+<!-- https://www.youtube.com/watch?v=C234gKqJw48&feature=youtu.be&t=5152 -->
+<div class="container">
+
+<div class="col">
+<p><img data-src="./cdp_dai_as_collateral.svg" class="plain" style="width:45.0%" /></p>
+</div>
+<div class="col">
+<ul>
+<li class="fragment">Clone contract and use Dai as collateral</li>
+<li class="fragment">Ability to create synthetic assets:
+<ul>
+<li class="fragment">Synthetic gold</li>
+<li class="fragment">Synthetic stock index</li>
+<li class="fragment">Leveraged margin short</li>
+<li class="fragment">“Not insured” by MKR holders</li>
+</ul></li>
+</ul>
+<!-- - "Short into existence"
+# - Take synthetic assets as collateral
+#    - Let's go full circle
+#    - Margin Long -->
+</div>
+</section>
+<section id="the-big-picture" class="level2">
+<h2>The Big Picture</h2>
+</section>
+<section id="triffin-dilemma" class="level2">
+<h2>Triffin Dilemma</h2>
+<ul>
+<li class="fragment">National currency as world reserve currency
+<ul>
+<li class="fragment">Controlling supply and demand of own economy</li>
+<li class="fragment">vs. providing enough supply for the world</li>
+</ul></li>
+<li class="fragment">This dilemma killed the gold standard of USD</li>
+</ul>
+</section>
+<section id="section-17" class="level2">
+<h2></h2>
+<p>If you squint, MakerDAO looks alot like a central bank.</p>
+</section>
+<section id="yea-but" class="level2">
+<h2>Yea, but…</h2>
+<ul>
+<li class="fragment">A <em>sound</em>, <em>transparent</em>, <em>non-fractional-reserve</em> bank</li>
+<li class="fragment">Supranational: Not bound to any specific economy</li>
+<li class="fragment">Restricted by design: Code-as-law</li>
+</ul>
+</section>
+<section id="section-18" class="level2">
+<h2></h2>
+<p>To overcome the Triffin dilemma, we need a <em>stable</em> currency which is <em>governed globally</em> and <em>independent of any specific state or economic area</em>.</p>
+<p>Sound familiar?</p>
+<p><small class="fragment">If interested, watch this talk: <a href="https://www.youtube.com/watch?v=2lxc7qCsvF8">MakerDAO: A New Hope for Financial Reform</a></small></p>
+</section>
+<section id="links" class="level2">
+<h2>Links</h2>
+<ul>
+<li class="fragment">https://makerdao.com/en/whitepaper/</li>
+<li class="fragment"><a href="https://makerdao.com/purple/">Purple Paper - Reference implementation in Haskell</a></li>
+<li class="fragment"><a href="https://mkr.tools/">MKR Tools</a></li>
+<li class="fragment"><a href="https://makerscan.io/">MakerScan</a></li>
+<li class="fragment">https://www.daiembassy.online/</li>
+<li class="fragment">https://github.com/makerdao/awesome-makerdao</li>
+</ul>
+</section>
+</section>
+<section id="thats-it" class="slide level1">
+<h1>That’s it</h1>
+<p>Thanks for listening! Any questions?</p>
+<p><small>Twitter/GitHub <span class="citation" data-cites="lordi">@lordi</span></small></p>
+</section>
+<section class="slide level1">
+
+<section id="bonus-slides" class="level2">
+<h2>Bonus slides</h2>
+</section>
+<section id="oracles" class="level2">
+<h2>Oracles</h2>
+<ul>
+<li class="fragment">“The smart contract needs to know the price of ETH”</li>
+<li class="fragment">“A smart contract can only operate on data that is on the blockchain”</li>
+<li class="fragment">Oracles to the rescue: The median value is chosen from multiple Oracle price feeds.</li>
+</ul>
+</section>
+<section id="oracle-contracts" class="level2">
+<h2>Oracle contracts</h2>
+<ul>
+<li class="fragment">Invididually owned <a href="https://github.com/makerdao/price-feed">Price feed contracts</a> will be called periodically and store the value.</li>
+<li class="fragment">Then they <code>poke</code> the <a href="https://github.com/makerdao/medianizer">Medianizer contract</a></li>
+<li class="fragment">On each poke, the medianizer calculates and stores the median price of all feeds.</li>
+<li class="fragment">Governance can whitelist certain price feed contracts.</li>
+</ul>
+</section>
+<section id="the-cool-thing-is" class="level2">
+<h2>The cool thing is</h2>
+<p>…other contracts can call <code>read</code> on the <a href="https://github.com/makerdao/medianizer/blob/master/src/medianizer.sol#L87">Medianizer</a>.</p>
+<p>Other Dapps like Compound, Gnosis and Augur are using it.</p>
+</section>
+<section id="room-for-improvement" class="level2">
+<h2>Room for improvement</h2>
+<ul>
+<li class="fragment"><em>n</em> price feeds means <em>n times the gas</em> every update.</li>
+<li class="fragment">Possible mitigation (Oracles V2) is to instead of calling a store and poke function on-chain, sign+send a message to a relayer who will then post it on-chain</li>
+</ul>
+</section>
+<section id="eth-weth-and-peth" class="level2">
+<h2>ETH, WETH and PETH</h2>
+<p>ETH → WETH → PETH → Dai</p>
+<ul>
+<li class="fragment">WETH: Wrapped ETH (ERC20 representation of Ether)</li>
+<li class="fragment">PETH: Pooled ETH</li>
+</ul>
+</section>
+<section id="short-technical-dive" class="level2">
+<h2>Short technical dive</h2>
+<ul>
+<li class="fragment"><code>open</code> – initialize CDP</li>
+<li class="fragment"><code>lock</code> – lock up collateral</li>
+<li class="fragment"><code>draw</code> – issue Dai</li>
+<li class="fragment"><code>free</code> – reclaim collateral</li>
+<li class="fragment"><code>wipe</code> – send back Dai (reduce issuance)</li>
+<li class="fragment"><code>shut</code> – close CDP</li>
+<li class="fragment"><code>give</code> – transfer CDP to another owner</li>
+<li class="fragment"><code>bite</code> – trigger liquidation / apply penalty</li>
+<li class="fragment"><code>grab</code> – receive CDP’s collateral while in liquidation</li>
+</ul>
+</section>
+<section id="section-19" class="level2">
+<h2></h2>
+<p><img data-src="./cdp.png" class="plain" /></p>
+</section>
+</section>
+    </div>
+  </div>
+
+  <script src="https://revealjs.com/lib/js/head.min.js"></script>
+  <script src="https://revealjs.com/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://revealjs.com/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://revealjs.com/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://revealjs.com/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
